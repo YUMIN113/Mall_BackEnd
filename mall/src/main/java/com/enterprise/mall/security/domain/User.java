@@ -22,9 +22,9 @@ import java.util.Set;
 public class User implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTO_INCREMENT
     @Column(name = "user_id")
-    private Long userId;
+    private long userId;
 
     @Column(name = "user_name")
     private String userName;
@@ -48,7 +48,10 @@ public class User implements UserDetails {
     private LocalDateTime modifyAt;
 
     @Builder
-    public User(String userName, String userEmail, String userPassword, Role role) {
+    public User(String userName,
+                String userEmail,
+                String userPassword,
+                Role role) {
         this.userName = userName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
