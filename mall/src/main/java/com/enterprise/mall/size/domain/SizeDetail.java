@@ -1,5 +1,6 @@
 package com.enterprise.mall.size.domain;
 
+import com.enterprise.mall.size.dto.SizeDetailRequestDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,5 +44,13 @@ public class SizeDetail {
         this.itemBodyName = itemBodyName;
         this.itemBodySize = itemBodySize;
         this.itemSizeId = itemSizeId;
+    }
+
+    public static SizeDetail createRegisterSizeDetail(SizeDetailRequestDto sizeDetailRequestDto, Long itemSizeId) {
+        return SizeDetail.builder()
+                .itemBodyName(sizeDetailRequestDto.getItemBodyName())
+                .itemBodySize(sizeDetailRequestDto.getItemBodySize())
+                .itemSizeId(itemSizeId)
+                .build();
     }
 }

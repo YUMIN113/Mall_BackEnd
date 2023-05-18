@@ -6,6 +6,9 @@ import com.enterprise.mall.size.repository.SizeRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class SizeService {
 
@@ -16,12 +19,13 @@ public class SizeService {
     }
 
     @Transactional(readOnly = false)
-    public void createSize(SizeRequestDto sizeRequestDto, Long itemId) {
-        sizeRepository.save(Size.builder()
-                .itemSizeName(sizeRequestDto.getItemSizeName())
-                .itemStock(sizeRequestDto.getItemStock())
-                .itemId(itemId)
-                .build());
+    public void saveSize(List<SizeRequestDto> sizeRequestDtoList, Long itemId) {
+
+        List<Size> saveSize = sizeRequestDtoList.stream()
+                .map(it -> Size.createSize(it, itemId))
+                .collect(Collectors.toList());
+
+        sizeRepository.saveAll(saveSize);
     }
 
 }

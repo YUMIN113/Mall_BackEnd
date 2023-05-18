@@ -5,6 +5,9 @@ import com.enterprise.mall.size.dto.SizeDetailRequestDto;
 import com.enterprise.mall.size.repository.SizeDetailRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class SizeDetailService {
 
@@ -14,11 +17,13 @@ public class SizeDetailService {
         this.sizeDetailRepository = sizeDetailRepository;
     }
 
-    public void createSizeDetail(SizeDetailRequestDto sizeDetailRequestDto, Long itemSizeId) {
-        sizeDetailRepository.save(SizeDetail.builder()
-                .itemBodyName(sizeDetailRequestDto.getItemBodyName())
-                .itemBodySize(sizeDetailRequestDto.getItemBodySize())
-                .itemSizeId(itemSizeId)
-                .build());
+    public void saveSizeDetail(List<SizeDetailRequestDto> sizeDetailRequestDtoList, Long itemSizeId) {
+
+        List<SizeDetail> saveSizeDetail = sizeDetailRequestDtoList.stream()
+                .map(it -> SizeDetail.createRegisterSizeDetail(it, itemSizeId))
+                .collect(Collectors.toList());
+
+        sizeDetailRepository.saveAll(saveSizeDetail);
+
     }
 }

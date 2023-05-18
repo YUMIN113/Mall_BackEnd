@@ -1,5 +1,6 @@
 package com.enterprise.mall.size.domain;
 
+import com.enterprise.mall.size.dto.SizeRequestDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,5 +42,13 @@ public class Size {
         this.itemSizeName = itemSizeName;
         this.itemStock = itemStock;
         this.itemId = itemId;
+    }
+
+    public static Size createSize(SizeRequestDto sizeRequestDto, Long itemId) {
+        return Size.builder()
+                .itemSizeName(sizeRequestDto.getItemSizeName())
+                .itemStock(sizeRequestDto.getItemStock())
+                .itemId(itemId)
+                .build();
     }
 }

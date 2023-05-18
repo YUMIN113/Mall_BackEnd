@@ -16,7 +16,7 @@ public class ItemService {
     }
 
     @Transactional(readOnly = false)
-    public void createItem(ItemRequestDto itemRequestDto) {
+    public void saveItem(ItemRequestDto itemRequestDto) {
         itemRepository.save(Item.builder()
                 .itemPic(itemRequestDto.getItemPic())
                 .itemName(itemRequestDto.getItemName())
