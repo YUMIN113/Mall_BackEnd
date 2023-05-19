@@ -16,14 +16,7 @@ public class ItemService {
     }
 
     @Transactional(readOnly = false)
-    public void saveItem(ItemRequestDto itemRequestDto) {
-        itemRepository.save(Item.builder()
-                .itemPic(itemRequestDto.getItemPic())
-                .itemName(itemRequestDto.getItemName())
-                .itemSubName(itemRequestDto.getItemSubName())
-                .itemPrice(itemRequestDto.getItemPrice())
-                .itemDetails(itemRequestDto.getItemDetails())
-                .itemDescription(itemRequestDto.getItemDescription())
-                .build());
+    public Item saveItem(ItemRequestDto itemRequestDto) {
+        return itemRepository.save(Item.createItem(itemRequestDto));
     }
 }

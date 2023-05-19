@@ -1,5 +1,6 @@
 package com.enterprise.mall.item.domain;
 
+import com.enterprise.mall.item.dto.ItemRequestDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -58,5 +59,16 @@ public class Item {
         this.itemPrice = itemPrice;
         this.itemDetails = itemDetails;
         this.itemDescription = itemDescription;
+    }
+
+    public static Item createItem(ItemRequestDto itemRequestDto) {
+        return Item.builder()
+                .itemPic(itemRequestDto.getItemPic())
+                .itemName(itemRequestDto.getItemName())
+                .itemSubName(itemRequestDto.getItemSubName())
+                .itemPrice(itemRequestDto.getItemPrice())
+                .itemDetails(itemRequestDto.getItemDetails())
+                .itemDescription(itemRequestDto.getItemDescription())
+                .build();
     }
 }

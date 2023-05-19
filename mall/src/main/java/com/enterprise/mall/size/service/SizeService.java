@@ -19,13 +19,13 @@ public class SizeService {
     }
 
     @Transactional(readOnly = false)
-    public void saveSize(List<SizeRequestDto> sizeRequestDtoList, Long itemId) {
+    public List<Size> saveSize(List<SizeRequestDto> sizeRequestDtoList, Long itemId) {
 
         List<Size> saveSize = sizeRequestDtoList.stream()
                 .map(it -> Size.createSize(it, itemId))
                 .collect(Collectors.toList());
 
-        sizeRepository.saveAll(saveSize);
+        return sizeRepository.saveAll(saveSize);
     }
 
 }
